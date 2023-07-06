@@ -25,3 +25,8 @@ The System component acts as the control room, displaying flight details.
 
 ## [Picture-for-console.log](./lab11events.jpg)
 
+# Continue on Lab12 
+
+Now each System,Manager,Pilot show results, photo attached shows the required 
+
+## [Photo-for-Console](./lab12.jpg) 

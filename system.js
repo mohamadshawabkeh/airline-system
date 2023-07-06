@@ -1,11 +1,20 @@
 'use strict';
+require('dotenv').config();
+const port = process.env.PORT || 3030;
+const ioServer = require('socket.io')(port);
 
-const eventsPool = require('./modular/events');
-require('./modular/manager/manager');
-require('./modular/pilot/pilot');
-eventsPool.on('new-flight', handleNewFlight);
-eventsPool.on('took-off', handleFlightTookOff);
-eventsPool.on('arrived', handleFlightArrived);
+ioServer.on('connection', (socket) => {
+  console.log('connected ', socket.id);
+
+  // ioServer.emit('new-flight',handleNewFlight);
+  socket.on('new-flight',handleNewFlight);
+
+  socket.on('took-off',handleFlightTookOff);
+  socket.on('arrived',handleFlightArrived);
+  // socket.on('flight-arrived',handleFlightArrived);
+
+  // ioServer.emit('flight-arrived',handleFlightArrived);
+  });
 
 function handleNewFlight(flightDetails) {
   console.log('Flight:', {
@@ -13,6 +22,10 @@ function handleNewFlight(flightDetails) {
     time: new Date().toLocaleString(),
     Details: flightDetails
   });
+  // ioServer.on('new-flight', flightDetails)
+
+  ioServer.emit('new-flight', flightDetails)
+
 }
 
 function handleFlightTookOff(flightDetails) {
@@ -29,4 +42,6 @@ function handleFlightArrived(flightDetails) {
     time: new Date().toLocaleString(),
     Details: flightDetails
   });
+  ioServer.emit('flight-arrived', flightDetails)
+
 }
