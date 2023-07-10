@@ -30,3 +30,27 @@ The System component acts as the control room, displaying flight details.
 Now each System,Manager,Pilot show results, photo attached shows the required 
 
 ## [Photo-for-Console](./lab12.jpg) 
+
+# continue on Lab13
+
+Things have been updated :
+
+- ###  system.js file:
+Add new object called 'queue' that have One property (flights) to contain all 'new-flight' events.
+
+Inside 'new-flight' event handler create a new ID for the flight and add it to the queue object (inside flights property).
+
+Listen to new event 'get-all':
+
+Once triggered should emit 'flight' event with all stored messages as payload back to the pilot.
+Delete all messages from the message queue.
+Listen to 'delete' event that once triggered should delete a flight with specific Id from the message queue.(Strech Goal)
+
+- ### pilot.js file:
+trigger 'get-all' event, to get all messages back from the message queue.
+
+After triggering the 'flight-arrived' event make sure to delete the flight from the message queue.(Strech Goal)
+
+Listen to 'fligt' event to log this message to the console 'Pilot:Sorry i didn't catch this flight ID 332u443673r32yuf463'.
+
+## [Photo-for-Console](./lab13.jpg) 
